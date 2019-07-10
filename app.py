@@ -2,19 +2,15 @@ from flask import Flask, jsonify, request
 import os
 import json
 import requests
-
 app = Flask(__name__)
-
 @app.route('/')
 def index():
     a=os.environ['Authorization']
     return "นายสิงหา จิรังศรี เลขที่ 14 ชั้น ม.4/8"
-
 @app.route("/webhook", methods=['POST'])
 def webhook():
     if request.method == 'POST':
         return "OK"
-
 @app.route('/callback', methods=['POST'])
 def callback():
     json_line = request.get_json()
@@ -22,13 +18,7 @@ def callback():
     decoded = json.loads(json_line)
     user = decoded["events"][0]['replyToken']
     userText = decoded["events"][0]['message']['text']
-    #sendText(user,userText)
-    if (userText == 'สวัสดี') :
-        sendText(user,'เออ!!! ดีด้วย')
-    elif (userText == 'ไอ้บ้า') :
-        sendText(user,'อึงซิบ้า')
-    elif (userText == 'หล่อนะ') :
-        sendText(user,'ขอบคุณที่ชม')
+    sendText(user,userText)
     return '',200
 
 def sendText(user, text):

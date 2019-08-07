@@ -15,7 +15,7 @@ def webhook():
     if request.method == 'POST':
         return "OK"
 
-    @app.route('/callback', methods=['POST'])
+@app.route('/callback', methods=['POST'])
 def callback():
     json_line = request.get_json()
     json_line = json.dumps(json_line)

@@ -2,16 +2,20 @@ from flask import Flask, jsonify, request
 import os
 import json
 import requests
+
 app = Flask(__name__)
 @app.route('/')
+
 def index():
     a=os.environ['Authorization']
     return "นายสิงหา จิรังศรี เลขที่ 14 ชั้น ม.4/8"
+
 @app.route("/webhook", methods=['POST'])
 def webhook():
     if request.method == 'POST':
         return "OK"
-@app.route('/callback', methods=['POST'])
+
+    @app.route('/callback', methods=['POST'])
 def callback():
     json_line = request.get_json()
     json_line = json.dumps(json_line)
